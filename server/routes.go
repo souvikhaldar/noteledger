@@ -18,6 +18,13 @@ func (s *Server) AddNote() http.HandlerFunc {
 			return
 		}
 		log.Printf("Payload: %+v", tn)
+		userID := 1
+		noteType := `text`
+		if err := s.NoteSvc.AddNote(userID, noteType, tn.Note, tn.Bucket); err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
 		w.Write([]byte("Note added successfully!"))
 	}
 

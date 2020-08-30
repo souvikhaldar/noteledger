@@ -6,21 +6,18 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/souvikhaldar/noteledger/pkg/db"
-	"github.com/souvikhaldar/noteledger/pkg/note"
 )
 
 type Server struct {
-	Router  *mux.Router
-	DB      *db.DB
-	NoteSvc note.Repository
+	Router *mux.Router
+	DB     *db.DB
+	noteSvc note.Repository
 }
 
 func NewServer() *Server {
-	db := db.NewDB()
 	return &Server{
-		Router:  mux.NewRouter(),
-		DB:      db,
-		NoteSvc: db,
+		Router: mux.NewRouter(),
+		DB:     db.NewDB(),
 	}
 }
 
