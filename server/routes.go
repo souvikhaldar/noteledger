@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/souvikhaldar/noteledger/pkg/note"
+	"github.com/souvikhaldar/noteledger/pkg/response"
 )
 
 func (s *Server) AddNote() http.HandlerFunc {
@@ -24,8 +25,7 @@ func (s *Server) AddNote() http.HandlerFunc {
 			http.Error(w, err.Error(), 500)
 			return
 		}
-
-		w.Write([]byte("Note added successfully!"))
+		response.NewResponse(w, true, "Note added successfully", http.StatusOK)
 	}
 
 }
