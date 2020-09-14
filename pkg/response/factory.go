@@ -7,21 +7,21 @@ import (
 )
 
 type Response struct {
-	Success bool   `json:"success"`
-	Message string `json:"message"`
+	Success bool        `json:"success"`
+	Body    interface{} `json:"body"`
 }
 
-func NewResponse(
+func NewJSONResponse(
 	w http.ResponseWriter,
 	success bool,
-	message string,
+	body interface{},
 	status int,
 ) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(status)
 	r := Response{
 		Success: success,
-		Message: message,
+		Body:    body,
 	}
 	if err := json.NewEncoder(w).Encode(r); err != nil {
 		log.Println(err)

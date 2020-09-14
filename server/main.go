@@ -31,6 +31,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func main() {
 	server := NewServer()
 	server.Router.HandleFunc("/note", server.AddNote()).Methods("POST")
+	server.Router.HandleFunc("/note/{bucket}", server.GetNote()).Methods("GET")
 	port := "8192"
 	log.Println("Server is running on port: ", port)
 	log.Fatal(http.ListenAndServe(":"+port, server))
